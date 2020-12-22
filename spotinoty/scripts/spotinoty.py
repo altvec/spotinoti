@@ -2,48 +2,39 @@
 
 """Spotinoty script."""
 
-import asyncio
 import time
+from subprocess import run  # noqa: S404
 
-from spotinoty.spotify import get_token, get_track_info
+from spotinoty.spotify import Client
 
 
-async def say(song_info: str):
+def say(song_info: str):
     """Run system say command.
 
     Args:
         song_info: string that represents current song info.
     """
-    proc = await asyncio.create_subprocess_exec(
-        '/usr/bin/say',
-        '-v',
-        'Alex',
-        song_info,
-        stdout=asyncio.subprocess.PIPE,
-    )
-    await proc.wait()
+    run(['/usr/bin/say', '-v', 'Alex', song_info], check=True)  # noqa: S603
 
 
 def main():
     """Run the script.
 
     Raises:
-        SystemExit: If can't get access token from Spotify
+        SystemExit: on KeyboardInterrupt
     """
-    token = get_token()
-    if not token:
-        raise SystemExit("Can't get access token!")
+    spotify = Client()
+    prev_song = spotify.get_current_track()
 
-    prev_song = get_track_info(token)
     while True:
-        try:
-            current_song = get_track_info(token)
-        except Exception:
-            token = get_token()
+        current_song = spotify.get_current_track()
         if prev_song != current_song:
-            asyncio.run(say(current_song))
+            say(current_song)
             prev_song = current_song
-        time.sleep(10)
+        try:
+            time.sleep(10)
+        except KeyboardInterrupt:
+            raise SystemExit('Exit.')
 
 
 if __name__ == '__main__':
