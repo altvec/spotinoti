@@ -5,7 +5,7 @@
 import time
 from subprocess import run  # noqa: S404
 
-from spotinoty.spotify import Client
+from spotinoti.spotify import Client
 
 
 def say(song_info: str):
@@ -24,7 +24,9 @@ def main():
         SystemExit: on KeyboardInterrupt
     """
     spotify = Client()
+
     prev_song = spotify.get_current_track()
+    say(prev_song)
 
     while True:
         current_song = spotify.get_current_track()
@@ -34,7 +36,7 @@ def main():
         try:
             time.sleep(10)
         except KeyboardInterrupt:
-            raise SystemExit('Exit.')
+            raise SystemExit('Bye! 👋')
 
 
 if __name__ == '__main__':

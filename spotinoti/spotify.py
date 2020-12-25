@@ -1,6 +1,7 @@
 """Spotify functions."""
 
 import os
+from pathlib import Path
 
 import spotipy
 from dotenv import load_dotenv
@@ -14,7 +15,10 @@ class Client(object):
     def __init__(self):
         """Initialize client."""
         self.client = spotipy.Spotify(
-            auth_manager=spotipy.SpotifyOAuth(scope=os.getenv('SCOPE')),
+            auth_manager=spotipy.SpotifyOAuth(
+                scope=os.getenv('SCOPE'),
+                cache_path=Path('/tmp') / '.cache-spotinoti',  # noqa: S108
+            ),
         )
 
     def get_current_track(self) -> str:
@@ -24,8 +28,6 @@ class Client(object):
             str
         """
         current_song = self.client.currently_playing()
-        if current_song is None:
-            return 'Nothing is playing.'
         artist = current_song['item']['artists'][0]['name']
         song_name = current_song['item']['name']
         return 'Now playing the {0} by {1}.'.format(song_name, artist)

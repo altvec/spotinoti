@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>EnvironmentVariables</key>
+		<dict>
+			<key>USERNAME</key>
+			<string></string>
+			<key>SPOTIPY_CLIENT_ID</key>
+			<string></string>
+			<key>SPOTIPY_CLIENT_SECRET</key>
+			<string></string>
+			<key>SPOTIPY_REDIRECT_URI</key>
+			<string>http://127.0.0.1:9090/callback</string>
+			<key>SCOPE</key>
+			<string>user-read-currently-playing</string>
+		</dict>
+		<key>Label</key>
+		<string>com.altvec.spotinoti</string>
+		<key>Program</key>
+		<string>/Users/skali/.local/bin/spotinoti</string>
+		<key>KeepAlive</key>
+		<true/>
+	</dict>
+</plist>

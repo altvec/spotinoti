@@ -1,11 +1,11 @@
 [tool.poetry]
-name = "spotinoty"
-version = "0.1.0"
+name = "spotinoti"
+version = "0.1.1"
 description = ""
 authors = ["altvec <me@sergeykalistratov.com>"]
 license = "MIT"
 packages = [
-    { include = "spotinoty" },
+    { include = "spotinoti" },
 ]
 
 [tool.poetry.dependencies]
@@ -21,4 +21,4 @@ requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-spotinoty = "spotinoty.scripts.spotinoty:main"
+spotinoti = "spotinoti.scripts.spotinoti:main"
